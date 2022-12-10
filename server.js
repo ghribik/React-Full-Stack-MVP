@@ -57,7 +57,8 @@ app.get('/api/books/:id', (req, res, next) => {
 app.get('/api/author/:name', (req, res, next) => {
     async function getBooksByAuthor() {
         try {
-            const result = await client.query("SELECT * FROM books WHERE author LIKE"+" '%"+req.params.name+"%'");
+            //let lowerCaseAuthor = toLowerCase(req.params.name);
+            const result = await client.query("SELECT * FROM books WHERE author LIKE" + " '%"+req.params.name+"%'");
             if(result.rows.length === 0){
                 res.status(404).send("No books found!");
             }else{
