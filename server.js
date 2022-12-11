@@ -14,7 +14,7 @@ app.use("/src", assetsRouter);
 const { Client } = require('pg');
 const client = new Client({
     //connectionString: "postgresql://postgres:docker@127.0.0.1:5432/books_db",
-    connectionString: process.env.POSTGRES_CONNECTION_STRING,
+    connectionString: POSTGRES_CONNECTION_STRING + "ssl=true",
 });
 client.connect();
 
@@ -185,7 +185,7 @@ app.use((err, req, res, next) => {
 });
 
 //const { PORT = 5000 } = process.env;
-const PORT = process.env.PORT;
+const PORT = PORT;
 
 app.listen(PORT, () => {
   console.log();
