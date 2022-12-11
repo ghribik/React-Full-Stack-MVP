@@ -60,12 +60,13 @@ export function App() {
     bookAuthor, setBookAuthor
   }
 
-  let API_URL = "https://book-store-api-server.onrender.com";
-  //let API_URL = '';
+  //let API_URL = "https://book-store-api-server.onrender.com";
+  // let API_URL = '';
+    let API_URL = 'http://localhost:5000'
 
   useEffect(() => {
     if (readIsMounted.current && readDisplay){
-      fetch("/api/books")
+      fetch(`${API_URL}/api/books`)
       .then(res => res.json())
       .then(
         (result) => {
