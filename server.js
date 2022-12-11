@@ -57,8 +57,10 @@ app.get('/api/books/:id', (req, res, next) => {
 app.get('/api/author/:name', (req, res, next) => {
     async function getBooksByAuthor() {
         try {
-            //let lowerCaseAuthor = toLowerCase(req.params.name);
-            const result = await client.query("SELECT * FROM books WHERE author LIKE" + " '%"+req.params.name+"%'");
+            let lowerCaseAuthor = req.params.name.toLowerCase();
+            const result = await client.query(`
+            SELECT * FROM books 
+            WHERE lower(author) LIKE` + " '%"+lowerCaseAuthor+"%'");
             if(result.rows.length === 0){
                 res.status(404).send("No books found!");
             }else{
@@ -76,11 +78,14 @@ app.get('/api/author/:name', (req, res, next) => {
 app.post('/api/books/', (req, res, next) => {
     let book = req.body;
     console.log(book)
-    if(book.title && book.author && book.cover && book.isbn){
+    if(book.title && book.author && book.cover && book.isbn && book.price){
         async function postbook(book) {
             try {
-                const result = await client.query(`INSERT INTO books (title, author, cover, isbn) 
-                VALUES ($1, $2, $3, $4) RETURNING *`, [book.title, book.author, book.cover, parseInt(book.isbn)]);
+                const result = await client.query(`
+                INSERT INTO books (title, author, cover, isbn, price) 
+                VALUES ($1, $2, $3, $4, $5) 
+                RETURNING *
+                `, [book.title, book.author, book.cover, book.isbn, book.price]);
                 res.status(201).send(result.rows);
             } catch (err) {
                 next(err);
@@ -88,7 +93,7 @@ app.post('/api/books/', (req, res, next) => {
         };
         postbook(book);
     }else{
-        res.status(500).send("Format = title, author, cover, isbn!")
+        res.status(500).send("Format = title, author, cover, isbn, price!")
     };
 }); 
 
@@ -98,29 +103,52 @@ app.patch('/api/books/:id', (req, res, next) => {
     console.log(book)
     async function patchbook() {
         try {
-            const idCheck = await client.query(`SELECT * FROM books
-            WHERE id = $1`, [req.params.id]);
+            const idCheck = await client.query(`
+            SELECT * FROM books
+            WHERE id = $1
+            `, [req.params.id]);
             if(idCheck.rows.length === 0){
                 res.status(404).send("book ID not found or improperly formatted!");
             };        
-            if (book.title !== undefined) {
-                const resultTitle = await client.query(`UPDATE books SET title = $1
-                WHERE id = $2 RETURNING *`, [book.title, req.params.id]);
+            if (book.title) {
+                const resultTitle = await client.query(`
+                UPDATE books 
+                SET title = $1
+                WHERE id = $2 RETURNING *
+                `, [book.title, req.params.id]);
             };
-            if (book.cover !== undefined) {
-                const resultcover = await client.query(`UPDATE books SET cover = $1
-                WHERE id = $2 RETURNING *`, [book.cover, req.params.id]);
+            if (book.cover) {
+                const resultCover = await client.query(`
+                UPDATE books 
+                SET cover = $1
+                WHERE id = $2 RETURNING *
+                `, [book.cover, req.params.id]);
             };
-            if (book.author !== undefined) {
-                const resultauthor = await client.query(`UPDATE books SET author = $1
-                WHERE id = $2 RETURNING *`, [book.author, req.params.id]);
+            if (book.author) {
+                const resultAuthor = await client.query(`
+                UPDATE books 
+                SET author = $1
+                WHERE id = $2 RETURNING *
+                `, [book.author, req.params.id]);
             };
-            if (book.isbn !== undefined) {
-                const resultTrack = await client.query(`UPDATE books SET isbn = $1
-                WHERE id = $2 RETURNING *`, [book.isbn, req.params.id]);
+            if (book.isbn) {
+                const resultISBN = await client.query(`
+                UPDATE books 
+                SET isbn = $1
+                WHERE id = $2 RETURNING *
+                `, [book.isbn, req.params.id]);
             };
-            const result = await client.query(`SELECT * FROM books
-            WHERE id = $1`, [req.params.id]);
+            if (book.price) {
+                const resultPrice = await client.query(`
+                UPDATE books 
+                SET price = $1
+                WHERE id = $2 RETURNING *
+                `, [book.price, req.params.id]);
+            };
+            const result = await client.query(`
+            SELECT * FROM books
+            WHERE id = $1
+            `, [req.params.id]);
             res.status(200).send(result.rows);
         } catch (err) {
             next(err);
@@ -133,8 +161,10 @@ app.patch('/api/books/:id', (req, res, next) => {
 app.delete('/api/books/:id', (req, res, next) => {
     async function deleteBook() {
         try {
-            const result = await client.query(`DELETE FROM books
-            WHERE id = $1 RETURNING *`, [req.params.id]);
+            const result = await client.query(`
+            DELETE FROM books
+            WHERE id = $1 RETURNING *
+            `, [req.params.id]);
             if(result.rows.length === 0){
                 res.status(404).send("book ID not found or improperly formatted!");
             }else{

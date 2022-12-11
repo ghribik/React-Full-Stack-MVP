@@ -2,8 +2,6 @@ import Card from 'react-bootstrap/Card';
 
 function BookCard(props) {
 
-  //console.log(props)
-
   return (
     <Card style={{ display: 'inline-block'}}>
       <Card.Text className='bookText'>Book Stock #{props.id}</Card.Text>
@@ -14,7 +12,7 @@ function BookCard(props) {
         <div style={{cursor: "pointer"}}
         onClick={()=> window.open(`https://www.google.com/search?q=${props.isbn}`)}
         ><a style={{color: 'darkblue', fontWeight: 'bold'}}>isbn: {props.isbn}</a></div>
-        <Card.Text className='bookText'>$9.99</Card.Text>
+        <Card.Text className='bookText'>{props.price}</Card.Text>
       </Card.Body>
     </Card>
   );

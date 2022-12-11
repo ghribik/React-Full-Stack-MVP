@@ -3,22 +3,24 @@
   background-color:black;
   border-color: olive;
   border-width: 50px;
-  border-style:solid
+  height:auto;
+  border-style:solid;
+  overflow: hidden;
 }
 
 .appHeader{
   padding-left: 0;
-  display:inline-block
+  display:inline-block;
+  overflow: hidden;
 }
 .buttonHolder{
   background-color: darkred;
   width: 130px;
   height: 520px;
   float: left;
-  border-color: olive;
+  border-color: aliceblue;
   border-width: 10px;
   border-style:outset;
-
 }
 
 .btn{
@@ -31,7 +33,6 @@
   display: inline-block;
   justify-content: center;
   width: 1105px;
-  height: auto;
   border-top: 10px;
   border-color: olive;
   border-style:outset;
@@ -45,6 +46,11 @@
 
 #updateCardImg{
   width: 250px
+}
+
+#bannerImg{
+  max-width: 100%;
+  height: auto;
 }
 
 .card-img-top{

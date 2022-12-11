@@ -8,11 +8,11 @@ function UpdateCard(props) {
   const [authorResponse, setAuthorResponse] = useState('');
   const [imgResponse, setImgResponse] = useState('');
   const [isbnResponse, setIsbnResponse] = useState('');
+  const [priceResponse, setPriceResponse] = useState('');
   const [response, setResponse] = useState('');
 
   const recordResponse = (event) => {
     setResponse(event.target.value);
-    console.log(response)
   }
 
   const recordTitle = (event) => {
@@ -23,10 +23,12 @@ function UpdateCard(props) {
   }
   const recordImg = (event) => {
     setImgResponse(event.target.value);
-    console.log(imgResponse)
   }
   const recordIsbn = (event) => {
     setIsbnResponse(event.target.value);
+  }
+  const recordPrice = (event) => {
+    setPriceResponse(event.target.value);
   }
 
   function submitResponse()  {
@@ -35,7 +37,8 @@ function UpdateCard(props) {
       title: titleResponse,
       author: authorResponse, 
       cover: imgResponse,
-      isbn: isbnResponse
+      isbn: isbnResponse,
+      price: priceResponse
     })
 
     props.setSubmitUpdate(!props.submitUpdate)
@@ -52,7 +55,8 @@ function UpdateCard(props) {
       <Card.Text><input id='img' className='bookInput' placeholder='Book Image URL' onChange={recordImg}></input></Card.Text>
         <Card.Title><input id='title' className='bookInput' placeholder='Book Title' onChange={recordTitle}></input></Card.Title>
         <Card.Text><input id='author' className='bookInput' placeholder='Book Author' onChange={recordAuthor}></input></Card.Text>
-        <Card.Text><input id='isbn' className='bookInput' placeholder='Book ISBN' onChange={recordIsbn}></input></Card.Text>
+        <Card.Text><input id='isbn' className='bookInput' placeholder='Book ISBN Number' onChange={recordIsbn}></input></Card.Text>
+        <Card.Text><input id='price' className='bookInput' placeholder='Book Price' onChange={recordPrice}></input></Card.Text>
         <div className="btn btn-three"
         onClick={()=> submitResponse()}
         ><span>SUBMIT</span></div>

@@ -4,30 +4,37 @@ import BookCard from "./BookCard";
 import UpdateCard from "./UpdateCard";
 import CreateCard from "./CreateCard";
 import RemoveCard from "./RemoveCard";
+import AuthorCard from "./AuthorCard";
 
 export function App() {
-
-  const readIsMounted = useRef(false);
-  const updateIsMounted = useRef(false);
-  const createIsMounted = useRef(false);
-  const deleteIsMounted = useRef(false);
 
   const [count, setCount] = useState(0);
   const [apidata, setAPIData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [read, setRead] = useState(false);
-  const [update, setUpdate] = useState(false);
-  const [create, setCreate] = useState(false);
-  const [remove, setRemove] = useState(false);
+  const readIsMounted = useRef(false);
+  const authorIsMounted = useRef(false);
+  const updateIsMounted = useRef(false);
+  const createIsMounted = useRef(false);
+  const deleteIsMounted = useRef(false);
 
+  const [read, setRead] = useState(null);
+  const [update, setUpdate] = useState(null);
+  const [create, setCreate] = useState(null);
+  const [remove, setRemove] = useState(null);
+  const [author, setAuthor] = useState(null);
+  const [displayAuthor, setDisplayAuthor] = useState(null);
+
+  const [readDisplay, setReadDisplay] = useState(null);
   const [submitCreate, setSubmitCreate] = useState(null);
   const [submitRemove, setSubmitRemove] = useState(null);
   const [submitUpdate, setSubmitUpdate] = useState(null);
+  const [submitAuthor, setSubmitAuthor] = useState(null);
 
   const [bookData, setBookData] = useState({})
   const [bookID, setBookID] = useState(null)
+  const [bookAuthor, setBookAuthor] = useState(null)
 
   let createBookProps = {
     create, setCreate,
@@ -42,14 +49,20 @@ export function App() {
   }
 
   let updateBookProps = {
-  update, setUpdate,
-  submitUpdate, setSubmitUpdate,
-  bookID, setBookID,
-  bookData, setBookData
+    update, setUpdate,
+    submitUpdate, setSubmitUpdate,
+    bookID, setBookID,
+    bookData, setBookData
+  }
+
+  let getAuthorProps = {
+    author, setAuthor,
+    submitAuthor, setSubmitAuthor,
+    bookAuthor, setBookAuthor
   }
 
   useEffect(() => {
-    if (readIsMounted.current){
+    if (readIsMounted.current && read){
       fetch("/api/books")
       .then(res => res.json())
       .then(
@@ -62,6 +75,7 @@ export function App() {
         (error) => {
           setLoading(true);
           setError(error);
+          alert(error);
         }
       )
     }else{
@@ -70,9 +84,32 @@ export function App() {
   }, [read])
 
   useEffect(() => {
-    if(updateIsMounted.current){
-      console.log(bookID)
-      console.log(bookData)
+    if (authorIsMounted.current && submitAuthor){
+      fetch('/api/author/' + bookAuthor)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setLoading(true);
+          setAPIData(result);
+          setReadDisplay(null);
+          setDisplayAuthor(true);
+          setSubmitAuthor(null);
+          console.log('API author data fetched')
+          console.log(result)
+        },
+        (error) => {
+          setLoading(true);
+          setError(error);
+          alert(error);
+        }
+      )
+    }else{
+      authorIsMounted.current = true;
+    }
+  }, [submitAuthor])
+
+  useEffect(() => {
+    if(updateIsMounted.current && submitUpdate){
       fetch(`/api/books/${bookID}`,  {
         method: 'PATCH',
         mode: "cors",
@@ -84,11 +121,15 @@ export function App() {
         (result) => {
           setLoading(true);
           setAPIData(result);
+          setReadDisplay(true);
+          setSubmitUpdate(null);
           console.log('API data patched')
+          console.log(result)
         },
         (error) => {
           setLoading(true);
           setError(error);
+          alert(error);
         }
       )
     }else{
@@ -97,8 +138,7 @@ export function App() {
   }, [submitUpdate])
 
   useEffect(() => {
-    if(createIsMounted.current){
-      console.log(bookData)
+    if(createIsMounted.current && submitCreate){
       fetch("/api/books",  {
         method: 'POST',
         mode: "cors",
@@ -110,11 +150,15 @@ export function App() {
         (result) => {
           setLoading(true);
           setAPIData(result);
+          setReadDisplay(true);
+          setSubmitCreate(null);
           console.log('user data posted to API')
+          console.log(result)
         },
         (error) => {
           setLoading(true);
           setError(error);
+          alert(error)
         }
       )
     }else{
@@ -123,7 +167,7 @@ export function App() {
   }, [submitCreate])
 
   useEffect(() => {
-    if(deleteIsMounted.current){
+    if(deleteIsMounted.current && submitRemove){
       fetch(`/api/books/${bookID}`, {
         method: 'DELETE',
         mode: "cors",
@@ -132,12 +176,16 @@ export function App() {
       .then(
         (result) => {
           setLoading(true);
-          console.log('data deleted from API')
-          setRead(!read)
+          setAPIData([result]);
+          setReadDisplay(true);
+          setSubmitRemove(null);
+          console.log('data deleted from API');
+          console.log(result);
         },
         (error) => {
           setLoading(true);
           setError(error);
+          alert(error);
         }
       )
     }else{
@@ -156,11 +204,14 @@ return (
                 <img 
                 id="home"
                 src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
-                onClick={()=> {setRead(null), setUpdate(null), setCreate(null), setRemove(null)}}
+                onClick={()=> {setRead(null), setReadDisplay(null), setAuthor(null), setDisplayAuthor(null), setUpdate(null), setCreate(null), setRemove(null)}}
                 />
               </div>
-              <div className="btn btn-three" onClick={()=> {setRead(!read)}}>
+              <div className="btn btn-three" onClick={()=> {setRead(!read), setReadDisplay(!readDisplay), setDisplayAuthor(null)}}>
                 <span>Read</span>
+              </div>
+              <div className="btn btn-three" onClick={()=> {setAuthor(!author)}}>
+                <span>Author</span>
               </div>
               <div className="btn btn-three" onClick={()=> {setUpdate(!update)}}>
                 <span>Edit</span>
@@ -174,19 +225,27 @@ return (
 
             </div>
         </div>
-        <img src="https://cdn.pixabay.com/photo/2015/06/02/12/59/book-794978_960_720.jpg"/>
+        <img id="bannerImg" src="https://cdn.pixabay.com/photo/2015/06/02/12/59/book-794978_960_720.jpg"/>
       </div>
       <div id="bookCards">
         {!remove ? "" : <RemoveCard {...deleteBookProps} />}
       </div>
       <div id="bookCards">
-        {!create ? <div></div> : <CreateCard {...createBookProps} />}
+        {!create ? "" : <CreateCard {...createBookProps} />}
       </div>
       <div id="bookCards">
-        {!update ? <div></div> : <UpdateCard {...updateBookProps} />}
+        {!update ? "" : <UpdateCard {...updateBookProps} />}
       </div>
       <div id="bookCards">
-        {!read ? <div></div> : apidata.map((book, i) => 
+        {!author ? "" : <AuthorCard {...getAuthorProps} />}
+      </div>
+      <div id="bookCards">
+        {!readDisplay ? "" : apidata.map((book, i) => 
+        <BookCard {...apidata[i]} key={book + i} className="book" book={apidata[i].title}/>
+      )}
+      </div>
+      <div id="bookCards">
+        {!displayAuthor ? "" : apidata.map((book, i) => 
         <BookCard {...apidata[i]} key={book + i} className="book" book={apidata[i].title}/>
       )}
       </div>
