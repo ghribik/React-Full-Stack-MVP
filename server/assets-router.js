@@ -1,5 +1,8 @@
 const express = require("express");
 
+const cors = require('cors');
+app.use(cors());
+
 const router = express.Router();
 
 const imageRegex = /\/.+\.(svg|png|jpg|png|jpeg)$/;
