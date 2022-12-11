@@ -60,6 +60,8 @@ export function App() {
     bookAuthor, setBookAuthor
   }
 
+  let API_URL = "https://book-store-api-server.onrender.com"
+
   useEffect(() => {
     if (readIsMounted.current && readDisplay){
       fetch("/api/books")
@@ -84,7 +86,7 @@ export function App() {
 
   useEffect(() => {
     if (authorIsMounted.current && submitAuthor){
-      fetch('/api/author/' + bookAuthor)
+      fetch(`${API_URL}/api/author/` + bookAuthor)
       .then(res => res.json())
       .then(
         (result) => {
@@ -109,7 +111,7 @@ export function App() {
 
   useEffect(() => {
     if(updateIsMounted.current && submitUpdate){
-      fetch(`/api/books/${bookID}`,  {
+      fetch(`${API_URL}/api/books/${bookID}`,  {
         method: 'PATCH',
         mode: "cors",
         headers: { 'Content-Type': 'application/json' },
@@ -138,7 +140,7 @@ export function App() {
 
   useEffect(() => {
     if(createIsMounted.current && submitCreate){
-      fetch("/api/books",  {
+      fetch(`${API_URL}/api/books`,  {
         method: 'POST',
         mode: "cors",
         headers: { 'Content-Type': 'application/json' },
@@ -167,7 +169,7 @@ export function App() {
 
   useEffect(() => {
     if(deleteIsMounted.current && submitRemove){
-      fetch(`/api/books/${bookID}`, {
+      fetch(`${API_URL}/api/books/${bookID}`, {
         method: 'DELETE',
         mode: "cors",
       })
