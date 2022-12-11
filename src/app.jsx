@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import "./app.css";
-import BookCard from "./BookCard";
-import UpdateCard from "./UpdateCard";
-import CreateCard from "./CreateCard";
-import RemoveCard from "./RemoveCard";
-import AuthorCard from "./AuthorCard";
+import BookCard from "./BookCard.jsx";
+import UpdateCard from "./UpdateCard.jsx";
+import CreateCard from "./CreateCard.jsx";
+import RemoveCard from "./RemoveCard.jsx";
+import AuthorCard from "./AuthorCard.jsx";
 
 export function App() {
 
