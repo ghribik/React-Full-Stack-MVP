@@ -19,7 +19,6 @@ export function App() {
   const createIsMounted = useRef(false);
   const deleteIsMounted = useRef(false);
 
-  const [read, setRead] = useState(null);
   const [update, setUpdate] = useState(null);
   const [create, setCreate] = useState(null);
   const [remove, setRemove] = useState(null);
@@ -62,7 +61,7 @@ export function App() {
   }
 
   useEffect(() => {
-    if (readIsMounted.current && read){
+    if (readIsMounted.current && readDisplay){
       fetch("/api/books")
       .then(res => res.json())
       .then(
@@ -81,7 +80,7 @@ export function App() {
     }else{
       readIsMounted.current = true;
     }
-  }, [read])
+  }, [readDisplay])
 
   useEffect(() => {
     if (authorIsMounted.current && submitAuthor){
@@ -204,13 +203,13 @@ return (
                 <img 
                 id="home"
                 src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
-                onClick={()=> {setRead(null), setReadDisplay(null), setAuthor(null), setDisplayAuthor(null), setUpdate(null), setCreate(null), setRemove(null)}}
+                onClick={()=> {setReadDisplay(null), setAuthor(null), setDisplayAuthor(null), setUpdate(null), setCreate(null), setRemove(null)}}
                 />
               </div>
-              <div className="btn btn-three" onClick={()=> {setRead(!read), setReadDisplay(!readDisplay), setDisplayAuthor(null)}}>
+              <div className="btn btn-three" onClick={()=> {setReadDisplay(!readDisplay), setDisplayAuthor(null)}}>
                 <span>Read</span>
               </div>
-              <div className="btn btn-three" onClick={()=> {setAuthor(!author)}}>
+              <div className="btn btn-three" onClick={()=> {setAuthor(!author), setDisplayAuthor(null)}}>
                 <span>Author</span>
               </div>
               <div className="btn btn-three" onClick={()=> {setUpdate(!update)}}>

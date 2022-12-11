@@ -13,8 +13,8 @@ app.use("/src", assetsRouter);
 
 const { Client } = require('pg');
 const client = new Client({
-    //connectionString: "postgresql://postgres:docker@127.0.0.1:5432/books_db",
-    connectionString: POSTGRES_CONNECTION_STRING,
+    connectionString: "postgresql://postgres:docker@127.0.0.1:5432/books_db",
+    //connectionString: POSTGRES_CONNECTION_STRING,
 });
 client.connect();
 
@@ -184,7 +184,8 @@ app.use((err, req, res, next) => {
     res.status(500).send('Internal server error!');
 });
 
-const { PORT = PORT } = process.env;
+const { PORT = 5000 } = process.env;
+//const { PORT = PORT } = process.env;
 
 app.listen(PORT, () => {
   console.log();
