@@ -7,7 +7,7 @@ function BookCard(props) {
       <Card.Text className='bookText'>Book Stock #{props.id}</Card.Text>
       <Card.Img variant="top" src={props.cover} />
       <Card.Body>
-        <Card.Title className='bookText'>{props.title}</Card.Title>
+        <Card.Text className='bookText'>{props.title}</Card.Text>
         <Card.Text className='bookText'>{props.author}</Card.Text>
         <div style={{cursor: "pointer"}}
         onClick={()=> window.open(`https://www.google.com/search?q=${props.isbn}`)}

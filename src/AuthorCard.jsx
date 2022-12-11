@@ -18,7 +18,7 @@ function AuthorCard(props) {
 
   return (
     <Card id="dataCard" style={{ display: 'inline-block'}}>
-      <Card.Title className='bookText' style={{color: 'white'}}></Card.Title>
+      <Card.Text className='bookText' style={{color: 'white'}}></Card.Text>
       <video width='450' controls autoPlay name='media'>
         <source src="https://media.istockphoto.com/id/815982204/video/skull-held-out-theater-acting-concept.mp4?s=mp4-640x640-is&k=20&c=mEJUcFmD3fq8sBpJoPlQo99Z5shod5mY1cf_ggwi_VA=" type="video/mp4" />
       </video>

@@ -47,7 +47,7 @@ function UpdateCard(props) {
 
   return (
     <Card id="dataCard" style={{ display: 'inline-block'}}>
-      <Card.Title className='bookText' style={{color: 'white'}}></Card.Title>
+      <Card.Text className='bookText' style={{color: 'white'}}></Card.Text>
       <video width='450' controls autoPlay name='media'>
         <source src="https://media.istockphoto.com/id/1207745492/video/stedicam-shot-camera-moves-forward-along-shelves-filled-with-paper-books-the-huge-round.mp4?s=mp4-640x640-is&k=20&c=-7kpTeGC4T7LphcRat1Vo7ktnLWI_DNdt-1lo1FnXVk=" type="video/mp4" />
       </video>
