@@ -65,7 +65,7 @@ export function App() {
 
   useEffect(() => {
     if (readIsMounted.current && readDisplay){
-      fetch("/api/books")
+      fetch(`${API_URL}/api/books`)
       .then(res => res.json())
       .then(
         (result) => {

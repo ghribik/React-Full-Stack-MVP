@@ -7,9 +7,9 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 
-const assetsRouter = require("./server/assets-router");
-app.use("/", express.static(path.join(__dirname, "public")));
-app.use("/src", assetsRouter);
+// const assetsRouter = require("./server/assets-router");
+// app.use("/", express.static(path.join(__dirname, "public")));
+// app.use("/src", assetsRouter);
 
 const { Client } = require('pg');
 const client = new Client({
