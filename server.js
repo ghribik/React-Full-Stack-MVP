@@ -18,6 +18,10 @@ const client = new Client({
 });
 client.connect();
 
+//const { PORT = 5000 } = process.env;
+const PORT = process.env.PORT;
+
+
 //GET --- test to see if server is live
 app.get("/api/", (req, res) => {
   res.json("Hello World!");
@@ -183,9 +187,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Internal server error!');
 });
-
-//const { PORT = 5000 } = process.env;
-const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
   console.log();
