@@ -11,7 +11,7 @@ function BookCard(props) {
         <Card.Text className='bookText'>{props.author}</Card.Text>
         <div style={{cursor: "pointer"}}
         onClick={()=> window.open(`https://www.google.com/search?q=${props.isbn}`)}
-        ><a style={{color: 'darkblue', fontWeight: 'bold'}}>isbn: {props.isbn}</a></div>
+        ><a id='isbnLink'>isbn: {props.isbn}</a></div>
         <Card.Text className='bookText'>{props.price}</Card.Text>
       </Card.Body>
     </Card>
