@@ -7,6 +7,7 @@ body{
   background-color:black;
   border-color: olive;
   border-width: 50px;
+  max-width: 1125px;
   height:auto;
   border-style:solid;
   overflow: hidden;
@@ -36,7 +37,7 @@ body{
 #bookCards{
   display: inline-block;
   justify-content: center;
-  width: 1105px;
+  width: 800px;
   border-top: 10px;
   border-color: olive;
   border-style:outset;
@@ -44,7 +45,7 @@ body{
 }
 
 #dataCard{
-  width: 500px;
+  width: auto;
   background-color: black;
 }
 
@@ -53,8 +54,8 @@ body{
 }
 
 #bannerImg{
-  max-width: 100%;
-  height: auto;
+  max-height: 100%;
+  width: auto;
 }
 
 .card-img-top{
