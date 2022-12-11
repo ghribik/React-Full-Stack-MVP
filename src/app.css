@@ -54,8 +54,8 @@ body{
   rgba(0, 0, 0, 0.6),
   rgba(0, 0, 0, 0.6)
   ), 
-  url("https://mcdn.wallpapersafari.com/medium/61/32/CqYQxN.jpg");
-  background-size: 580px, cover;
+  url("https://storage.googleapis.com/webdesignledger.pub.network/LaT/edd/2016/02/grungy-front-book-cover-3-793x1024.jpg");
+  background-size: cover;
 }
 
 #updateCardImg{
@@ -80,7 +80,7 @@ body{
   height: auto;
   padding-left: 5%;
   padding-right: 5%;
-  border-color: darkred;
+  border-color: #795c34;
   border-width: 10px;
   border-style: ridge;
   background:

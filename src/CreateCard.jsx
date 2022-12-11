@@ -47,7 +47,7 @@ function CreateCard(props) {
         <source src="https://media.istockphoto.com/id/539413204/video/ld-typing-by-pressing-the-keys-of-typewriter-in-hurry.mp4?s=mp4-640x640-is&k=20&c=GZLXnh-7jmZB6hMXcKv24qbfwfiROSXfxN17ibYNlA4=" type="video/mp4" />
       </video>
       <Card.Body>
-      <Card.Text><input id='img' className='bookInput' type='text' placeholder='Book Image URL' onChange={recordImg}></input></Card.Text>
+        <Card.Text><input id='img' className='bookInput' type='text' placeholder='Book Image URL' onChange={recordImg}></input></Card.Text>
         <Card.Title><input id='title' className='bookInput' type='text' placeholder='Book Title' onChange={recordTitle}></input></Card.Title>
         <Card.Text><input id='author' className='bookInput' type='text' placeholder='Book Author' onChange={recordAuthor}></input></Card.Text>
         <Card.Text><input id='isbn' className='bookInput' type='text' placeholder='Book ISBN Number' onChange={recordIsbn}></input></Card.Text>
