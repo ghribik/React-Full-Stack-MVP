@@ -52,8 +52,8 @@ function UpdateCard(props) {
         <source src="https://media.istockphoto.com/id/1207745492/video/stedicam-shot-camera-moves-forward-along-shelves-filled-with-paper-books-the-huge-round.mp4?s=mp4-640x640-is&k=20&c=-7kpTeGC4T7LphcRat1Vo7ktnLWI_DNdt-1lo1FnXVk=" type="video/mp4" />
       </video>
       <Card.Body>
-        <Card.Text><input id='img' className='bookInput' placeholder='Book Image URL' onChange={recordImg}></input></Card.Text>
         <Card.Text><input id='id' className='bookInput' placeholder='Book ID Number' onChange={recordResponse}></input></Card.Text>
+        <Card.Text><input id='img' className='bookInput' placeholder='Book Image URL' onChange={recordImg}></input></Card.Text>
         <Card.Text><input id='title' className='bookInput' placeholder='Book Title' onChange={recordTitle}></input></Card.Text>
         <Card.Text><input id='author' className='bookInput' placeholder='Book Author' onChange={recordAuthor}></input></Card.Text>
         <Card.Text><input id='isbn' className='bookInput' placeholder='Book ISBN Number' onChange={recordIsbn}></input></Card.Text>
