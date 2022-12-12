@@ -44,7 +44,7 @@ function CreateCard(props) {
     <Card id="dataCard" style={{ display: 'inline-block'}}>
       <Card.Text className='bookText' style={{color: 'white'}}></Card.Text>
       <video width='450' controls autoPlay name='media'>
-        <source src="https://media.istockphoto.com/id/539413204/video/ld-typing-by-pressing-the-keys-of-typewriter-in-hurry.mp4?s=mp4-640x640-is&k=20&c=GZLXnh-7jmZB6hMXcKv24qbfwfiROSXfxN17ibYNlA4=" type="video/mp4" />
+        <source src="https://media.gettyimages.com/id/1207056689/video/stack-of-old-books-falling-onto-a-table.mp4?s=mp4-640x640-gi&k=20&c=8jYOrJOZvPNQoxtvUB89cdDNjmNdERtZvdnTITbvgKI=" type="video/mp4" />
       </video>
       <Card.Body>
         <Card.Text><input id='img' className='bookInput' type='text' placeholder='Book Image URL' onChange={recordImg}></input></Card.Text>

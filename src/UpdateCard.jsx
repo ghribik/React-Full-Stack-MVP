@@ -49,7 +49,7 @@ function UpdateCard(props) {
     <Card id="dataCard" style={{ display: 'inline-block'}}>
       <Card.Text className='bookText' style={{color: 'white'}}></Card.Text>
       <video width='450' controls autoPlay name='media'>
-        <source src="https://media.istockphoto.com/id/1207745492/video/stedicam-shot-camera-moves-forward-along-shelves-filled-with-paper-books-the-huge-round.mp4?s=mp4-640x640-is&k=20&c=-7kpTeGC4T7LphcRat1Vo7ktnLWI_DNdt-1lo1FnXVk=" type="video/mp4" />
+        <source src="https://media.istockphoto.com/id/539413204/video/ld-typing-by-pressing-the-keys-of-typewriter-in-hurry.mp4?s=mp4-640x640-is&k=20&c=GZLXnh-7jmZB6hMXcKv24qbfwfiROSXfxN17ibYNlA4=" type="video/mp4" />
       </video>
       <Card.Body>
         <Card.Text><input id='id' className='bookInput' placeholder='Book ID Number' onChange={recordResponse}></input></Card.Text>
